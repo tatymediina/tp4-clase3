@@ -1,37 +1,46 @@
 class CuentaBancaria {
-  #saldo;
+  #saldo
 
-  constructor(titular, saldo) {
-    this.titular = titular;
-    this.#saldo = saldo >= 0 ? saldo : 0;
+  constructor(titular, saldo = 0) {
+    this.titular = titular
+    this.#saldo = saldo >= 0 ? saldo : 0
   }
+
   get saldo() {
-    return this.#saldo;
+    return this.#saldo
   }
 
-  set saldo(nuevoSaldo) {
-    if (nuevoSaldo >= 0) {
-      this.#saldo = nuevoSaldo;
-    } else {
-      console.log("El saldo no puede ser negativo");
+  depositar(monto) {
+    if (typeof monto !== 'number' || monto <= 0) {
+      console.log("Monto inválido")
+      return false
     }
+    this.#saldo += monto
+    console.log(`Depósito de $${monto} realizado. Saldo actual: $${this.#saldo}`)
+    return true
   }
 
-  set extraer(monto) {
-    if(monto <= this.saldo){
-      this.#saldo -=monto
-    }else{
+  extraer(monto) {
+    if (typeof monto !== 'number' || monto <= 0) {
+      console.log("Monto inválido ")
+      return false
+    }
+    if (monto > this.#saldo) {
       console.log("Fondos insuficientes")
+      return false
     }
+    this.#saldo -= monto
+    console.log(`Extracción de $${monto} realizada. Saldo actual: $${this.#saldo}`)
+    return true;
   }
 }
-const micuenta = new CuentaBancaria("Pepe", 1000)
-    
 
-console.log(micuenta.saldo)      
-micuenta.saldo = 2000
-console.log(micuenta.saldo)
-micuenta.extraer = 400
-console.log(micuenta.saldo)     
-micuenta.saldo = -500           
-console.log(micuenta.saldo)     
+const cuenta1 = new CuentaBancaria("Pepe", 1000);
+
+console.log(`Saldo inicial: $${cuenta1.saldo}`);
+
+cuenta1.depositar(500);
+cuenta1.extraer(200);
+cuenta1.extraer(2000);  
+cuenta1.depositar(-50); 
+console.log(`Saldo final: $${cuenta1.saldo}`);
