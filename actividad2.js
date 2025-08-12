@@ -10,7 +10,7 @@ class CuentaBancaria {
     return this.#saldo
   }
 
-  depositar(monto) {
+  setDepositar(monto) {
     if (typeof monto !== 'number' || monto <= 0) {
       console.log("Monto inválido")
       return false
@@ -20,7 +20,7 @@ class CuentaBancaria {
     return true
   }
 
-  extraer(monto) {
+  setExtraer(monto) {
     if (typeof monto !== 'number' || monto <= 0) {
       console.log("Monto inválido ")
       return false
@@ -39,8 +39,8 @@ const cuenta1 = new CuentaBancaria("Pepe", 1000);
 
 console.log(`Saldo inicial: $${cuenta1.saldo}`);
 
-cuenta1.depositar(500);
-cuenta1.extraer(200);
-cuenta1.extraer(2000);  
-cuenta1.depositar(-50); 
+cuenta1.setDepositar(500);
+cuenta1.setExtraer(200);
+cuenta1.setExtraer(2000);  
+cuenta1.setDepositar(-50); 
 console.log(`Saldo final: $${cuenta1.saldo}`);
